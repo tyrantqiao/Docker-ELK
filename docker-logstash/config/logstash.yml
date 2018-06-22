@@ -24,8 +24,9 @@
 #
 # Which directory should be used by logstash and its plugins
 # for any persistent needs. Defaults to LOGSTASH_HOME/data
-#
-path.data: /var/lib/logstash
+# 
+# Q: make this not work as docker
+# path.data: /var/lib/logstash
 #
 # ------------ Pipeline Settings --------------
 #
@@ -204,8 +205,9 @@ path.data: /var/lib/logstash
 #   * debug
 #   * trace
 #
+# Q: make this not work for docker
 # log.level: info
-path.logs: /var/log/logstash
+# path.logs: /var/log/logstash
 #
 # ------------ Other Settings --------------
 #

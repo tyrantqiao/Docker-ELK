@@ -3,4 +3,5 @@
 #   https://www.elastic.co/guide/en/logstash/current/multiple-pipelines.html
 
 - pipeline.id: main
-  path.config: "./conf.d/*.conf"
+  #path.config: "./conf.d/*.conf"
+  path.config: "./*.conf"
