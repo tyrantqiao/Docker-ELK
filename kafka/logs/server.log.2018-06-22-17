@@ -8,3 +8,4 @@
 [2018-06-22 18:14:13,729] INFO [GroupMetadataManager brokerId=1] Removed 0 expired offsets in 21 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
 [2018-06-22 18:22:59,136] INFO [GroupCoordinator 1]: Preparing to rebalance group console-consumer-39717 with old generation 1 (__consumer_offsets-38) (kafka.coordinator.group.GroupCoordinator)
 [2018-06-22 18:22:59,136] INFO [GroupCoordinator 1]: Group console-consumer-39717 with generation 2 is now empty (__consumer_offsets-38) (kafka.coordinator.group.GroupCoordinator)
+[2018-06-22 18:24:13,709] INFO [GroupMetadataManager brokerId=1] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
