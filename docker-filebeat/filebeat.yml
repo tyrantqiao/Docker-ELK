@@ -1,0 +1,25 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    #- /root/elk-demo/logs/*.log
+    - /path/to/logs/*.log
+  fields:
+    log_topics: demo3
+#----------------------- kafka output -----------------------------------
+output.kafka:
+  enabled: true
+  hosts: ["localhost:9092","localhost:9093","localhost:9094"]
+
+  worker: 3
+
+  #发送到kafka的topics
+  #topic: '%{[fields][log_topics]}'
+  topic: 'demo3'
+  #broker event partition strategy [random,round_robin,hash] default->hash
+  partition.round_robin:
+    reachable_only: false
+  required_acks: 1
+  compression: gzip
+  max_message_bytes: 1000000
+

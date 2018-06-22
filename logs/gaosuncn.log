@@ -1,0 +1,21 @@
+2018-04-03 10:06:34.726  INFO 24 --- [io-18900-exec-8] c.g.pmcontrols.web.PersonBaseController  : 办案区人员列表查询:{"isDeleted":"N","name":"","organizeMagicIds":[],"policeMagicId":"","statusQryparam":1009}
+2018-04-03 10:06:34.732  INFO 24 --- [io-18900-exec-8] com.gosuncn.runner.OperateLogSaver       : 操作日志保存任务已添加：QUERYALL--查询嫌疑人----
+2018-04-03 10:06:34.733  INFO 24 --- [io-18900-exec-8] c.g.common.utils.CollectorThreadPool     : 要添加的线程:com.gosuncn.runner.OperateLogSaver@20629700
+2018-04-03 10:06:34.956  INFO 24 --- [ol-1-thread-815] c.g.common.utils.CollectorThreadPool     : 要添加的线程:com.gosuncn.runner.CacheChanger@6d14f6a6
+2018-04-03 10:06:34.956  INFO 24 --- [ol-1-thread-815] c.g.auth.service.OperateLogServiceBase   : 记录INFO操作日志成功：{"createUser":"7d7dff9db4e2344a41b5217a53f329e1","createdTime":"2018-04-03 10:06:34","id":120608,"isDeleted":"N","logDesc":"查询嫌疑人","logLevel":"INFO","magicId":"7168253ce8f8ee7b1a97f7c9b1803f0b","operateContent":"{QUERYALL}:{雅瑶测试}:{查询嫌疑人}:{\"\"}","operateResult":"Y","serverIp":"fe80:0:0:0:6cd9:10ff:fe59:20bc%veth6c30b79","sortNum":0,"userAccount":"111111","userIp":"127.0.0.1","userMagicId":"7d7dff9db4e2344a41b5217a53f329e1"}
+2018-04-03 10:06:34.956  INFO 24 --- [ol-1-thread-816] com.gosuncn.runner.CacheChanger          : 变更缓存:[{"createUser":"7d7dff9db4e2344a41b5217a53f329e1","createdTime":"2018-04-03 10:06:34","id":120608,"isDeleted":"N","logDesc":"查询嫌疑人","logLevel":"INFO","magicId":"7168253ce8f8ee7b1a97f7c9b1803f0b","operateContent":"{QUERYALL}:{雅瑶测试}:{查询嫌疑人}:{\"\"}","operateResult":"Y","serverIp":"fe80:0:0:0:6cd9:10ff:fe59:20bc%veth6c30b79","sortNum":0,"userAccount":"111111","userIp":"127.0.0.1","userMagicId":"7d7dff9db4e2344a41b5217a53f329e1"}]
+2018-04-03 10:06:34.956  INFO 24 --- [ol-1-thread-815] com.gosuncn.runner.OperateLogSaver       : 操作日志保存任务已完成
+2018-04-03 10:06:34.956  INFO 24 --- [ol-1-thread-816] com.gosuncn.runner.CacheChanger          : 缓存已变更...
+2018-04-03 10:06:07.191  INFO 24 --- [io-18900-exec-8] com.gosuncn.common.utils.IpHelperUtil    : 获取到的请求：X-real-ip[null]
+2018-04-03 10:06:07.192  INFO 24 --- [io-18900-exec-8] com.gosuncn.common.utils.IpHelperUtil    : 获取到的请求：x-forwarded-for[null]
+2018-04-03 10:06:07.192  INFO 24 --- [io-18900-exec-8] com.gosuncn.common.utils.IpHelperUtil    : 获取到的请求：Proxy-Client-IP[null]
+2018-04-03 10:06:07.192  INFO 24 --- [io-18900-exec-8] com.gosuncn.common.utils.IpHelperUtil    : 获取到的请求：WL-Proxy-Client-IP[null]
+2018-04-03 10:06:07.192  INFO 24 --- [io-18900-exec-8] com.gosuncn.common.utils.IpHelperUtil    : 获取到的请求：RemoteAddr[192.168.35.87]
+2018-04-03 10:05:55.764  INFO 24 --- [ol-1-thread-803] com.gosuncn.runner.CacheChanger          : ...
+2018-04-03 10:05:55.777  INFO 24 --- [o-18900-exec-25] c.g.common.utils.CollectorThreadPool     : :com.gosuncn.runner.CacheChanger@1fb633c4
+2018-04-03 10:05:55.779  INFO 24 --- [ol-1-thread-804] com.gosuncn.runner.CacheChanger          : :[{createUser:7d7dff9db4e2344a41b5217a53f329e1,createdTime:2018-04-03 01:26:34,id:7430,isDeleted:N,lastUpdateTime:2018-04-03 10:05:55,magicId:34dd565c0e2c54b368f8bc286e49fb31,operationControl:Y,personMagicId:daa4bf9eb5101835c88e3311c7079c4a,sortNum:9,statusName:,stepProgressStatus:1007,updatedTime:2018-04-03 01:26:34,updatedUser:7d7dff9db4e2344a41b5217a53f329e1}]
+2018-04-03 10:05:55.779  INFO 24 --- [ol-1-thread-804] com.gosuncn.runner.CacheChanger          : ...
+2018-04-03 05:09:38.274  INFO 24 --- [o-18900-exec-11] c.gosuncn.auth.web.GosunWebInterceptor   : :{/service/pmcontrols/case/machine/status/167d9db98af77e104ed487d928854a57}{46}
+2018-04-03 05:09:38.274  INFO 24 --- [o-18900-exec-11] c.gosuncn.auth.web.GosunWebInterceptor   : :{/service/pmcontrols/case/machine/status/167d9db98af77e104ed487d928854a57}{46}
+2018-04-03 05:09:38.274  INFO 24 --- [o-18900-exec-11] c.gosuncn.auth.web.GosunWebInterceptor   : :{/service/pmcontrols/case/machine/status/167d9db98af77e104ed487d928854a57}{46}
+2018-04-03 05:10:08.280  INFO 24 --- [o-18900-exec-12] c.gosuncn.auth.web.GosunWebInterceptor   : :{/service/pmcontrols/case/machine/status/167d9db98af77e104ed487d928854a57}{49}
