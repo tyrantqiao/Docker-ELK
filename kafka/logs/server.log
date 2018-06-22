@@ -1,1 +1,20 @@
-[2018-06-23 00:04:25,488] INFO [GroupMetadataManager brokerId=2] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2018-06-23 00:37:24,627] WARN caught end of stream exception (org.apache.zookeeper.server.NIOServerCnxn)
+EndOfStreamException: Unable to read additional data from client sessionid 0x163ee1b9d100084, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:239)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:203)
+	at java.lang.Thread.run(Thread.java:748)
+[2018-06-23 00:37:24,799] INFO Closed socket connection for client /127.0.0.1:49074 which had sessionid 0x163ee1b9d100084 (org.apache.zookeeper.server.NIOServerCnxn)
+[2018-06-23 00:37:26,979] WARN caught end of stream exception (org.apache.zookeeper.server.NIOServerCnxn)
+EndOfStreamException: Unable to read additional data from client sessionid 0x163ee1b9d100080, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:239)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:203)
+	at java.lang.Thread.run(Thread.java:748)
+[2018-06-23 00:37:26,993] INFO Closed socket connection for client /127.0.0.1:53102 which had sessionid 0x163ee1b9d100080 (org.apache.zookeeper.server.NIOServerCnxn)
+[2018-06-23 00:37:29,165] WARN caught end of stream exception (org.apache.zookeeper.server.NIOServerCnxn)
+EndOfStreamException: Unable to read additional data from client sessionid 0x163ee1b9d10007f, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:239)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:203)
+	at java.lang.Thread.run(Thread.java:748)
+[2018-06-23 00:37:29,279] INFO Closed socket connection for client /0:0:0:0:0:0:0:1:40044 which had sessionid 0x163ee1b9d10007f (org.apache.zookeeper.server.NIOServerCnxn)
+[2018-06-23 00:37:30,054] INFO Expiring session 0x163ee1b9d100084, timeout of 6000ms exceeded (org.apache.zookeeper.server.ZooKeeperServer)
+[2018-06-23 00:37:30,201] INFO Processed session termination for sessionid: 0x163ee1b9d100084 (org.apache.zookeeper.server.PrepRequestProcessor)

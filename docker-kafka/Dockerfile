@@ -1,30 +1,18 @@
 FROM openjdk:8u151-jre-alpine
 
-ARG kafka_version=1.1.0
-ARG glibc_version=2.27
+ENV KAFKA_VERSION 1.1.0
+ENV KAFKA_HOME /opt/kafka_"$SCALA_VERSION"-"$KAFKA_VERSION"
 
-MAINTAINER wurstmeister_tyrantqiao
+MAINTAINER tyrantqiao
 
-ENV KAFKA_VERSION=$kafka_version \
-    GLIBC_VERSION=$glibc_version \
-    KAFKA_HOME=/opt/kafka
+RUN wget https://mirrors.shuosc.org/apache/kafka/"$KAFKA_VERSION"/kafka-"$KAFKA_VERSION"-src.tgz -O /tmp/kafka-"$KAFKA_VERSION"-src.tgz  \
+&&  tar xzf /tmp/kafka-"$KAFKA_VERSION"-src.tgz -C /  \
+&&  rm /tmp/kafka-"$KAFKA_VERSION"-src.tgz 
 
-ENV PATH=${PATH}:${KAFKA_HOME}/bin
+ADD scripts/start-kafka.sh /usr/bin/start-kafka.sh
+RUN chmod +x /usr/bin/start-kafka.sh
 
-RUN apk add --no-cache bash curl jq docker \
-&& mkdir /opt \
-&& wget http://www-eu.apache.org/dist/kafka/1.1.0/kafka-1.1.0-src.tgz /tmp/kafka-1.1.0-src.tgz \
-&& tar xfz /tmp/kafka-${KAFKA_VERSION}-src.tgz -C /opt \
-&& ln -s /opt/kafka-${KAFKA_VERSION} /opt/kafka \
-&& chmod a+x /opt/kafka/*.sh \
-&& mv /opt/kafka/*.sh /usr/bin \
-&& rm /tmp/* \
-&& wget https://github.com/sgerrand/alpine-pkg-glibc/releases/download/${GLIBC_VERSION}/glibc-${GLIBC_VERSION}.apk \
-&& apk add --no-cache --allow-untrusted glibc-${GLIBC_VERSION}.apk \
-&& rm glibc-${GLIBC_VERSION}.apk
+EXPOSE 9092 9093 9094 2181
 
-COPY overrides /opt/overrides
+ENTRYPOINT ["/usr/bin/start-kafka.sh"]
 
-VOLUME ["/kakfa"]
-
-CMD ["start-kafka.sh"]
