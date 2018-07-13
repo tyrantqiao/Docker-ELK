@@ -1,0 +1,10 @@
+version: '2'
+services:
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.3.1
+    environment:
+      SERVER_NAME: kibana-demo
+      ELASTICSEARCH_URL: http://172.19.0.2:9300
+    volumes:
+      - ./kibana.yml:/usr/share/kibana/config/kibana.yml
+    net: "host"
