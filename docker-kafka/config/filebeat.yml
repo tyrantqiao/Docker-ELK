@@ -1,0 +1,34 @@
+#=========================== Filebeat inputs =============================
+
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /home/tinker/docker/cmt-server/cmt-logs/*.log 
+  fields:
+    log_topics: cmt-server
+- type: log
+  enabled: true
+  paths:
+    - /home/tinker/docker/cloudConfig-server/cmt-logs/*.log
+  fields:
+    log_topics: cloudConfig
+- type: log
+  enabled: true
+  paths:
+    - /home/tinker/docker/file-server/logs/*.log
+  fields:
+    log_topics: file-server
+
+#============================ kafka output ===============================
+output.kafka:
+  enabled: true
+  hosts: ["localhost:9092"]
+  worker: 2
+  
+  topic: '%{[fields][log_topics]}'
+  partition.round_robin:
+    reachable_only: false
+  required_acks: 1
+  compression: gzip
+  max_message_bytes: 1000000

@@ -1,4 +1,4 @@
-version: '2.2'
+version: '3.6'
 services:
   zookeeper:
     image: wurstmeister/zookeeper
@@ -16,3 +16,26 @@ services:
       KAFKA_BROKER_ID: 1
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+  logstash:
+    image: docker.elastic.co/logstash/logstash:6.3.1
+    container_name: logstash
+    networks: ['stack']
+    depends_on: ['elasticsearch']
+    volumes:
+      - ./config/logstash.yml:/usr/share/logstash/logstash.yml
+      - ./config/logstash.conf:/usr/share/logstash/logstash.conf
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.3.1
+    container_name: elasticsearch
+    ports: ['9200:9200']
+    networks: ['stack']
+    volumes:
+      - './config/elasticsearch.yml:/usr/share/elasticsearch/data'
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.3.1
+    container_name: kibana
+    ports: ['5601:5601']
+    networks: ['host']
+    depends_on: ['elasticsearch']
+    volumes:
+      - './config/kibana.yml:/usr/share/kibana/kibana.yml'
