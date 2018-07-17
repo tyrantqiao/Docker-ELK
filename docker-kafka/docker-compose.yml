@@ -2,12 +2,14 @@ version: '3.6'
 services:
   zookeeper:
     image: wurstmeister/zookeeper
+    container_name: zookeeper
     ports:
       - "2181:2181"
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
   kafka:
     image: wurstmeister/kafka
+    container_name: kafka
     ports:
       - "9092:9092"
     environment:
@@ -20,22 +22,24 @@ services:
     image: docker.elastic.co/logstash/logstash:6.3.1
     container_name: logstash
     networks: ['stack']
-    depends_on: ['elasticsearch']
+    depends_on: ['elasticsearch','kafka']
     volumes:
-      - ./config/logstash.yml:/usr/share/logstash/logstash.yml
-      - ./config/logstash.conf:/usr/share/logstash/logstash.conf
+      - /home/elk/docker-kafka/config/logstash.yml:/usr/share/logstash/logstash.yml
+      - /home/elk/docker-kafka/config/logstash.conf:/usr/share/logstash/logstash.conf
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.3.1
     container_name: elasticsearch
     ports: ['9200:9200']
     networks: ['stack']
     volumes:
-      - './config/elasticsearch.yml:/usr/share/elasticsearch/data'
+      - /home/elk/docker-kafka/config/elasticsearch.yml:/usr/share/elasticsearch/elasticsearch.yml
   kibana:
     image: docker.elastic.co/kibana/kibana:6.3.1
     container_name: kibana
     ports: ['5601:5601']
-    networks: ['host']
+    networks: ['stack']
     depends_on: ['elasticsearch']
     volumes:
-      - './config/kibana.yml:/usr/share/kibana/kibana.yml'
+      - /home/elk/docker-kafka/config/kibana.yml:/usr/share/kibana/kibana.yml
+
+networks: {stack: {}}
