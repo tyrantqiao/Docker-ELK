@@ -22,7 +22,7 @@ services:
     image: docker.elastic.co/logstash/logstash:6.3.1
     container_name: logstash
     networks: ['stack']
-    depends_on: ['elasticsearch','kafka']
+    depends_on: ['kafka']
     volumes:
       - /home/elk/docker-kafka/config/logstash.yml:/usr/share/logstash/logstash.yml
       - /home/elk/docker-kafka/config/logstash.conf:/usr/share/logstash/logstash.conf
@@ -31,6 +31,7 @@ services:
     container_name: elasticsearch
     ports: ['9200:9200']
     networks: ['stack']
+    depends_on: ['logstash']
     volumes:
       - /home/elk/docker-kafka/config/elasticsearch.yml:/usr/share/elasticsearch/elasticsearch.yml
   kibana:
