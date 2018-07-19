@@ -24,7 +24,7 @@ filebeat.inputs:
 output.kafka:
   enabled: true
   hosts: ["localhost:9092"]
-  worker: 2
+  worker: 3
   
   topic: '%{[fields][log_topics]}'
   partition.round_robin:
