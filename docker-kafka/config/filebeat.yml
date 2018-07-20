@@ -4,27 +4,58 @@ filebeat.inputs:
 - type: log
   enabled: true
   paths:
-    - /home/tinker/docker/cmt-server/cmt-logs/*.log 
+    - /home/tinker/docker/cmt-server/archivecenter/*.log 
   fields:
-    log_topics: cmt-server
+    log_topics: archivecenter
 - type: log
   enabled: true
   paths:
-    - /home/tinker/docker/cloudConfig-server/cmt-logs/*.log
+    - /home/tinker/docker/cmt-server/casecenter/*.log
   fields:
-    log_topics: cloudConfig
+    log_topics: casecenter
 - type: log
   enabled: true
   paths:
-    - /home/tinker/docker/file-server/logs/*.log
+    - /home/tinker/docker/cmt-server/eureka/*.log
   fields:
-    log_topics: file-server
+    log_topics: eureka
+- type: log
+  enabled: true
+  paths:
+    - /home/tinker/docker/cmt-server/faceapi/*.log
+  fields:
+    log_topics: faceapi
+- type: log
+  enabled: true
+  paths:
+    - /home/tinker/docker/cmt-server/im/*.log
+    - /home/tinker/docker/cmt-server/im/logs/im/*.log
+  fields:
+    log_topics: im
+- type: log
+  enabled: true
+  paths:
+    - /home/tinker/docker/cmt-server/interrogate/log
+  fields:
+    log_topics: interrogate
+- type: log
+  enabled: true
+  paths:
+    - /home/tinker/docker/cmt-server/permission/*.log
+  fields:
+    log_topics: permission
+- type: log
+  enabled: true
+  paths:
+    - /home/tinker/docker/cmt-server/thirdapi/*.log
+  fields:
+    log_topics: thirdapi
 
 #============================ kafka output ===============================
 output.kafka:
   enabled: true
   hosts: ["localhost:9092"]
-  worker: 3
+  worker: 5
   
   topic: '%{[fields][log_topics]}'
   partition.round_robin:
