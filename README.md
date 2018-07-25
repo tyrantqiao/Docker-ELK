@@ -1,5 +1,9 @@
 # Docker-ELK
 Try make elk each components docker, run easily
 
-# Docker-Filebeat
-Done, But still need command when image start running.
+# Use Docker-compose.yml can achieve the componet docker.
+- logstash not complete
+
+# TODO
+- each component will be tar.
+- will have a Dockerfile
