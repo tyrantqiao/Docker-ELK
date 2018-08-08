@@ -1,0 +1,8 @@
+[2018-06-16 16:04:13,709] INFO [GroupMetadataManager brokerId=1] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2018-06-16 16:14:13,708] INFO [GroupMetadataManager brokerId=1] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2018-06-16 16:24:13,708] INFO [GroupMetadataManager brokerId=1] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2018-06-16 16:34:13,709] INFO [GroupMetadataManager brokerId=1] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2018-06-16 16:44:13,709] INFO [GroupMetadataManager brokerId=1] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2018-06-16 16:54:13,709] INFO [GroupMetadataManager brokerId=1] Group console-consumer-66432 transitioned to Dead in generation 2 (kafka.coordinator.group.GroupMetadataManager)
+[2018-06-16 16:54:13,710] INFO Updated PartitionLeaderEpoch. New: {epoch:5, offset:49518}, Current: {epoch:4, offset:0} for Partition: __consumer_offsets-2. Cache now contains 1 entries. (kafka.server.epoch.LeaderEpochFileCache)
+[2018-06-16 16:54:13,955] INFO [GroupMetadataManager brokerId=1] Removed 4 expired offsets in 246 milliseconds. (kafka.coordinator.group.GroupMetadataManager)

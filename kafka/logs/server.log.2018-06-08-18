@@ -1,0 +1,8 @@
+[2018-06-08 19:04:37,122] INFO [GroupMetadataManager brokerId=1] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2018-06-08 19:09:58,446] INFO [GroupCoordinator 1]: Preparing to rebalance group logstash-g1 with old generation 1 (__consumer_offsets-20) (kafka.coordinator.group.GroupCoordinator)
+[2018-06-08 19:09:58,449] INFO [GroupCoordinator 1]: Group logstash-g1 with generation 2 is now empty (__consumer_offsets-20) (kafka.coordinator.group.GroupCoordinator)
+[2018-06-08 19:14:37,122] INFO [GroupMetadataManager brokerId=1] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2018-06-08 19:24:37,124] INFO [GroupMetadataManager brokerId=1] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2018-06-08 19:34:37,122] INFO [GroupMetadataManager brokerId=1] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2018-06-08 19:44:37,122] INFO [GroupMetadataManager brokerId=1] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2018-06-08 19:54:37,122] INFO [GroupMetadataManager brokerId=1] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)

@@ -1,0 +1,7 @@
+[2018-06-13 00:04:13,710] INFO [GroupMetadataManager brokerId=1] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2018-06-13 00:14:13,709] INFO [GroupMetadataManager brokerId=1] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2018-06-13 00:24:13,710] INFO [GroupMetadataManager brokerId=1] Group logstash-g1 transitioned to Dead in generation 20 (kafka.coordinator.group.GroupMetadataManager)
+[2018-06-13 00:24:13,843] INFO [GroupMetadataManager brokerId=1] Removed 1 expired offsets in 134 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2018-06-13 00:34:13,709] INFO [GroupMetadataManager brokerId=1] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2018-06-13 00:44:13,709] INFO [GroupMetadataManager brokerId=1] Removed 0 expired offsets in 0 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2018-06-13 00:54:13,709] INFO [GroupMetadataManager brokerId=1] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)

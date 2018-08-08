@@ -1,0 +1,2 @@
+[2018-06-09 02:23:04,398] TRACE [Broker id=0] Handling stop replica (delete=false) for partition my-replicated-topic-0 (state.change.logger)
+[2018-06-09 02:23:04,401] TRACE [Broker id=0] Finished handling stop replica (delete=false) for partition my-replicated-topic-0 (state.change.logger)

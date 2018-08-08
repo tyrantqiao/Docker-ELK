@@ -1,0 +1,7 @@
+[2018-06-09 02:04:37,122] INFO [GroupMetadataManager brokerId=1] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2018-06-09 02:14:37,124] INFO [GroupMetadataManager brokerId=1] Removed 0 expired offsets in 1 milliseconds. (kafka.coordinator.group.GroupMetadataManager)
+[2018-06-09 02:22:50,555] INFO [GroupCoordinator 1]: Preparing to rebalance group logstash-g1 with old generation 19 (__consumer_offsets-20) (kafka.coordinator.group.GroupCoordinator)
+[2018-06-09 02:22:50,584] INFO [GroupCoordinator 1]: Group logstash-g1 with generation 20 is now empty (__consumer_offsets-20) (kafka.coordinator.group.GroupCoordinator)
+[2018-06-09 02:23:03,484] INFO Terminating process due to signal SIGTERM (kafka.Kafka$)
+[2018-06-09 02:23:03,596] INFO [KafkaServer id=1] shutting down (kafka.server.KafkaServer)
+[2018-06-09 02:23:04,318] INFO [KafkaServer id=1] Starting controlled shutdown (kafka.server.KafkaServer)
