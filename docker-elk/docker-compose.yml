@@ -4,7 +4,7 @@ services:
     image: docker.elastic.co/beats/filebeat:6.3.1
     container_name: filebeat
     command: --strict.perms=false -e
-    #当无法启动filebeat检查是否传对参数，重要的是将日志存放地址替换掉filebeat中地址
+    #当报无法访问filebeat.yml文件时，尝试将配置文件挪个地方，有时因为权限问题导致无法访问。以下同理
     user: root
     volumes:
       - /etc/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
@@ -43,9 +43,12 @@ services:
     container_name: elasticsearch
     ports:
       - "9200:9200"
+      - "9300:9300"
     networks: ['stack']
     volumes:
       - /etc/elk/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      #用于做备份文件夹
+      - /opt/es-repo/:/opt/es-repo
     healthcheck:
       test: curl --cacert /usr/share/elasticsearch/config/certs/ca/ca.crt -s https://localhost:9200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
       interval: 30s
@@ -57,16 +60,17 @@ services:
     container_name: elasticsearch2
     ports:
       - "9201:9201"
+      - "9301:9301"
     networks: ['stack']
     depends_on: ['elasticsearch']
     volumes:
       - /etc/elk/config/elasticsearch2.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - /opt/es-repo/:/opt/es-repo
     healthcheck:
       test: curl --cacert /usr/share/elasticsearch/config/certs/ca/ca.crt -s https://localhost:9201 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
       interval: 30s
       timeout: 10s
       retries: 5
-
 
   logstash:
     image: docker.elastic.co/logstash/logstash:6.3.1
@@ -74,8 +78,11 @@ services:
     networks: ['stack']
     depends_on: ['elasticsearch','elasticsearch2']
     volumes:
-      - /etc/logstash/logstash.yml:/usr/share/logstash/logstash.yml
+      # logstash.yml=配置文件
+      - /etc/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
+      # xxx.conf是各种处理消息源的配置，自己定义即可
       - /etc/logstash/conf.d/demo.conf:/usr/share/logstash/pipeline/logstash.conf
+      # xxx.conf中使用的正则表达式可以写在patterns文件夹下，使用简单一点
       - /etc/logstash/patterns:/etc/logstash/patterns
     healthcheck:
       test: bin/logstash -t
@@ -83,20 +90,23 @@ services:
       timeout: 50s
       retries: 5
 
-  #logstash2:
-  #  image: docker.elastic.co/logstash/logstash:6.3.1
-  #  container_name: logstash2
-  #  networks: ['stack']
-  #  depends_on: ['elasticsearch']
-  #  volumes:
-  #    - /etc/logstash/logstash.yml:/usr/share/logstash/logstash.yml
-  #    - /etc/logstash/conf.d/demo.conf:/usr/share/logstash/pipeline/logstash.conf
-  #    - /etc/logstash/patterns:/etc/logstash/patterns
-  #  healthcheck:
-  #    test: bin/logstash -t
-  #    interval: 60s
-  #    timeout: 50s
-  #    retries: 5
+  logstash2:
+    image: docker.elastic.co/logstash/logstash:6.3.1
+    container_name: logstash2
+    networks: ['stack']
+    depends_on: ['elasticsearch','elasticsearch2']
+    volumes:
+      # logstash.yml=配置文件
+      - /etc/logstash/logstash2.yml:/usr/share/logstash/config/logstash.yml
+      # xxx.conf是各种处理消息源的配置，自己定义即可
+      - /etc/logstash/conf.d/demo.conf:/usr/share/logstash/pipeline/logstash.conf
+      # xxx.conf中使用的正则表达式可以写在patterns文件夹下，使用简单一点
+      - /etc/logstash/patterns:/etc/logstash/patterns
+    healthcheck:
+      test: bin/logstash -t
+      interval: 60s
+      timeout: 50s
+      retries: 5
 
   kibana:
     image: docker.elastic.co/kibana/kibana:6.3.1
@@ -104,11 +114,9 @@ services:
     ports:
       - "5601:5601"
     networks: ['stack']
-    depends_on: ['elasticsearch','elasticsearch2']
+    depends_on: ['elasticsearch']
     user: root
     volumes:
       - /etc/elk/config/kibana.yml:/usr/share/kibana/config/kibana.yml
-    environment:
-      XPACK_MONITORING_COLLECTION_ENABLED: "true"
 
 networks: {stack: {}}

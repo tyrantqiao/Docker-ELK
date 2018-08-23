@@ -1,0 +1,6 @@
+server.name: gosuncn-kibana
+server.host: 0.0.0.0
+server.port: 5601
+server.ssl.enabled: false
+elasticsearch.url: http://10.0.19.26:9200
+

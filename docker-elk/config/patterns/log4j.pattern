@@ -1,0 +1,6 @@
+WORDS [a-zA-Z]{3}
+LOGLEVEL ERROR|INFO|WARN
+RUNNING_THREAD ([a-zA-z0-9\-])*
+CLASS (\w|\.)+
+MSG .*
+CATALINAOUT \s*%{TIMESTAMP_ISO8601:time}\s*%{LOGLEVEL:loglevel}\s*[0-9]{2}\s*---\s*\[\s*%{RUNNING_THREAD:thread}\] %{CLASS:class}\s*:\s* %{MSG:msg}
