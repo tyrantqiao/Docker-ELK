@@ -3,7 +3,7 @@ cluster.name: es
 
 # 节点Node名称，ES启动时会自动创建节点名称，默认的是从ES的，但你也可进行配置
 #node.name: "birdESNode01"
-node.name: "node2"
+node.name: "node1"
 # # 是否作为主节点，每个节点都可以被配置成为主节点，默认值为true
 node.master: true
 #
@@ -58,20 +58,20 @@ node.ingest: true
 # #  默认情况下，ElasticSearch使用0.0.0.0地址（也就是说如果这个机子有几个网卡，则ElasticSearch都可以通过这些IP来使用其服务。所以如果我们的服务器有网卡绑定在外网时一定要注意设置ElasticSearch的属性），并为http传输开启9200-9300端口，为节点到节点的通信开启9300-9400端口，也可以自行设置IP地址：
 network.bind_host: 0.0.0.0
 #
-# # 该节点在外部的ip
+# # publish_host设置其他节点连接此节点的地址，如果不设置的话，则自动获取，publish_host的地址必须为真实地址：
 #network.publish_host: 10.0.19.26
 #
 # # bind_host和publish_host可以一起设置：（如果不想外网访问ES，可以设置这个）
 network.host: 0.0.0.0
 #
 # # 可以定制该节点与其他节点交互的端口：
-transport.tcp.port: 9301
+transport.tcp.port: 9300
 #
 # # 节点间交互时，可以设置是否压缩
 # transport.tcp.compress: true
 #
 # # 可以为Http传输监听定制端口：
-http.port: 9201
+http.port: 9200
 #
 # # 设置内容的最大长度：
 # http.max_content_length: 100mb
@@ -93,8 +93,11 @@ http.port: 9201
 #
 # # 设置新节点被启动时能够发现的主节点列表：
 discovery.zen.ping.unicast.hosts: ["10.0.19.26:9300", "10.0.19.26:9301"]
-# # 设置节点数量
+#
+# # 设置节点数=拥有节点数/2+1，防止脑裂的情况。
 discovery.zen.minimum_master_nodes: 2
+# # 监控
+xpack.monitoring.collection.enabled: true
 # # 设置是否可以通过正则或者_all删除或者关闭索引
 # action.destructive_requires_name 默认false 允许 可设置true不允许
 #
