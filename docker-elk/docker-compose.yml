@@ -8,7 +8,7 @@ services:
     user: root
     volumes:
       - /etc/elk/config/filebeat.yml:/usr/share/filebeat/filebeat.yml
-      - /home/elk/logs/:/path/to/log/
+      - /etc/logs/:/path/to/log/
     networks: ['stack']
    # healthcheck:
    #   test: filebeat test config
@@ -174,7 +174,7 @@ services:
       # logstash.yml=配置文件
       - /etc/elk/config/logstash.yml:/usr/share/logstash/config/logstash.yml
       # xxx.conf是各种处理消息源的配置，自己定义即可
-      - /etc/elk/config/demo.conf:/usr/share/logstash/pipeline/logstash.conf
+      - /etc/elk/config/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
       # xxx.conf中使用的正则表达式可以写在patterns文件夹下，使用简单一点
       - /etc/elk/config/patterns/:/etc/logstash/patterns
     #healthcheck:

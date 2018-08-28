@@ -1,4 +1,4 @@
-WORDS [a-zA-Z]{3}
+WORDS [a-zA-Z0-9\-\.]*
 LOGLEVEL ERROR|INFO|WARN
 RUNNING_THREAD ([a-zA-z0-9\-])*
 CLASS (\w|\.)+

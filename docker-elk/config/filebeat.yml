@@ -2,32 +2,51 @@
 xpack.monitoring:
   enabled: true
   elasticsearch:
-    hosts: ["172.16.16.10:9200","172.16.16.10:9201"]
+    hosts: ["10.0.19.26:9200","10.0.19.26:9201"]
 
 #=========================== Filebeat inputs =============================
 filebeat.inputs:
 #test
 - type: log
   enabled: true
+  #若是设为/path/to/log/**/*.log则会递归下面的子目录，读取所有的日志
   paths:
-    - /path/to/log/*.log
+    #现在存放目录格式应为/etc/logs/area/service/log/xxx.log
+    #/etc/logs/tianhe/faceapi/log/test.log
+    - /path/to/log/*/*/log/*.log
+  #这里fields不变，下面的东西可以随便定义
   fields:
-    log_topics: test
+    #现在这里的topics作为标志这个日志属于什么类型的，java的就以java开头，c++的就以c++开头
+    #若觉得需要标注什么东西，以java-**的形式标注出来
+    log_topics: java
+  #多行插件
   multiline:
+    #对时间2018-08-28 xx:xx:xx进行处理
     pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}'
+    #确定对正则转置
     negate: true
+    #向前还是向后匹配日志
     match: after
+    #最多一条日志中能有多少行
     max_lines: 1000
+    #若30s内无下一条日志与其匹配为一条日志，则直接将当前的日志发送过去
     timeout: 30s
 #============================ kafka output ===============================
+#发送给kafka集群
 output.kafka:
   enabled: true
-  hosts: ["172.16.16.10:9092","172.16.16.10:9093","172.16.16.10:9094"]
+  #注意ip要修改
+  hosts: ["10.0.19.26:9092","10.0.19.26:9093","10.0.19.26:9094"]
+  #集群数量左右即可，看遇见瓶颈时再慢慢修改，可以按照kibana监控中的反馈进行调节
   worker: 5
-  
+  #此处为自动获取上面设置的日志属于什么类型，这东西会发往给kafka->logstash，logstash再对这个进行处理
+  #若这个topic为java，则订阅了java*的logstash.conf会对这种类型日志进行处理，
+  #同理若为c++，则订阅了c++*的logstash.conf会对这种类型日志进行日志
   topic: '%{[fields][log_topics]}'
+  #kafka发消息的策略，默认这种即可，若有特别需求，看官方描述
   partition.round_robin:
     reachable_only: false
+  #以下配置默认即可
   required_acks: 1
   compression: gzip
   max_message_bytes: 1000000

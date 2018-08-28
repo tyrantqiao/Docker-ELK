@@ -2,4 +2,4 @@ http.host: 0.0.0.0
 # read password from logstash.keystore
 # xpack.monitoring.elasticsearch.password: ${ELASTIC_PASSWORD}
 xpack.monitoring.enabled: true
-xpack.monitoring.elasticsearch.url: http://172.16.16.10:9200
+xpack.monitoring.elasticsearch.url: http://10.0.19.26:9200
