@@ -59,7 +59,7 @@ node.ingest: true
 network.bind_host: 0.0.0.0
 #
 # # publish_host设置其他节点连接此节点的地址，如果不设置的话，则自动获取，publish_host的地址必须为真实地址：
-#network.publish_host: 10.0.19.26
+#network.publish_host: 172.16.16.10
 #
 # # bind_host和publish_host可以一起设置：（如果不想外网访问ES，可以设置这个）
 network.host: 0.0.0.0
@@ -92,7 +92,7 @@ http.port: 9200
 # discovery.zen.ping.multicast.enabled: false
 #
 # # 设置新节点被启动时能够发现的主节点列表：
-discovery.zen.ping.unicast.hosts: ["10.0.19.26:9300", "10.0.19.26:9301"]
+discovery.zen.ping.unicast.hosts: ["172.16.16.10:9300", "172.16.16.10:9301"]
 #
 # # 设置节点数=拥有节点数/2+1，防止脑裂的情况。
 discovery.zen.minimum_master_nodes: 2

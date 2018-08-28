@@ -2,140 +2,27 @@
 xpack.monitoring:
   enabled: true
   elasticsearch:
-    hosts: ["172.16.11.119:9200","172.16.11.119:9201"]
+    hosts: ["172.16.16.10:9200","172.16.16.10:9201"]
 
 #=========================== Filebeat inputs =============================
 filebeat.inputs:
-- type: log
-  enabled: false
-  paths:
-    - /home/tinker/docker/cmt-server/archivecenter/logs/cmt/*.log 
-  fields:
-    log_topics: archivecenter
-- type: log
-  enabled: false
-  paths:
-    - /home/tinker/docker/cmt-server/casecenter/logs/cmt/*.log
-  fields:
-    log_topics: casecenter
-- type: log
-  enabled: false
-  paths:
-    - /home/tinker/docker/cmt-server/eureka/logs/cmt/*.log
-  fields:
-    log_topics: eureka
-- type: log
-  enabled: false
-  paths:
-    - /home/tinker/docker/cmt-server/faceapi/logs/cmt/*.log
-  fields:
-    log_topics: faceapi
-- type: log
-  enabled: false
-  paths:
-    - /home/tinker/docker/cmt-server/im/logs/im/*.log
-  fields:
-    log_topics: im
-- type: log
-  enabled: false
-  paths:
-    - /home/tinker/docker/cmt-server/interrogate/logs/cmt/*.log
-  fields:
-    log_topics: interrogate
-- type: log
-  enabled: false
-  paths:
-    - /home/tinker/docker/cmt-server/permission/logs/cmt/*.log
-  fields:
-    log_topics: permission
-- type: log
-  enabled: false
-  paths:
-    - /home/tinker/docker/cmt-server/thirdapi/logs/cmt/*.log
-  fields:
-    log_topics: thirdapi
-
-#试点日志
-#黄埔
+#test
 - type: log
   enabled: true
   paths:
-    - /home/logs/huangpu/cmt-logs/*.log
-    - /home/logs/huangpu/log-face/log*/*.log
+    - /path/to/log/*.log
   fields:
-    log_topics: huangpu
+    log_topics: test
   multiline:
     pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}'
     negate: true
     match: after
     max_lines: 1000
     timeout: 30s
-#林和
-- type: log
-  enabled: true
-  paths:
-    - /home/logs/linhe/cms-logs/log*/*.log
-    - /home/logs/linhe/cmt-logs/*.log
-    - /home/logs/linhe/download-log/log*/*.log
-  fields:
-    log_topics: linhe
-  multiline:
-    pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}'
-    negate: true
-    match: after
-    max_lines: 1000
-    timeout: 30s
-#南山
-- type: log
-  enabled: true
-  paths:
-    - /home/logs/nanshan/log-cmt/*.log
-    - /home/logs/nanshan/log-cmt/logs-file-server/*.log
-    - /home/logs/nanshan/log-face/log/log*/*.log
-  fields:
-    log_topics: nanshan
-  multiline:
-    pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}'
-    negate: true
-    match: after
-    max_lines: 1000
-    timeout: 30s
-#增城
-- type: log
-  enabled: true
-  paths:
-    - /home/logs/zengcheng/cms-log/*log/*.log
-  fields:
-    log_topics: zengcheng
-  multiline:
-    pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}'
-    negate: true
-    match: after
-    max_lines: 1000
-    timeout: 30s
-#花都
-- type: log
-  enabled: true
-  paths:
-    - /home/logs/huadu/cmt-logs/*.log
-    - /home/logs/huadu/cms-log/log*/*.log
-    #- /home/logs/huadu/WORKDER log/log*/*.log
-    #- /home/logs/huadu/WORKER1 log/log*/*.log
-  fields:
-    log_topics: huadu
-  multiline:
-    pattern: '^[0-9]{4}-[0-9]{2}-[0-9]{2} [0-9]{2}:[0-9]{2}:[0-9]{2}'
-    negate: true
-    match: after 
-    #after连到上一次；before往下连
-    max_lines: 1000
-    timeout: 30s
-  #fields_under_root: true 
-  #使field变为顶级字段
 #============================ kafka output ===============================
 output.kafka:
   enabled: true
-  hosts: ["172.16.11.119:9092"]
+  hosts: ["172.16.16.10:9092","172.16.16.10:9093","172.16.16.10:9094"]
   worker: 5
   
   topic: '%{[fields][log_topics]}'

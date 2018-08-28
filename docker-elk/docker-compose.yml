@@ -1,4 +1,4 @@
-version: '3.6'
+version: '2'
 services:
   filebeat:
     image: docker.elastic.co/beats/filebeat:6.3.1
@@ -7,14 +7,14 @@ services:
     #当报无法访问filebeat.yml文件时，尝试将配置文件挪个地方，有时因为权限问题导致无法访问。以下同理
     user: root
     volumes:
-      - /etc/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
-      - /etc/logs/:/home/logs
+      - /etc/elk/config/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - /home/elk/logs/:/path/to/log/
     networks: ['stack']
-    healthcheck:
-      test: filebeat test config
-      interval: 30s
-      timeout: 15s
-      retries: 5    
+   # healthcheck:
+   #   test: filebeat test config
+   #   interval: 30s
+   #   timeout: 15s
+   #   retries: 5    
   
   zoo1:
     image: zookeeper
@@ -140,12 +140,12 @@ services:
     volumes:
       - /etc/elk/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       #用于做备份文件夹
-      - /opt/es-repo/:/opt/es-repo
-    healthcheck:
-      test: curl --cacert /usr/share/elasticsearch/config/certs/ca/ca.crt -s https://localhost:9200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
-      interval: 30s
-      timeout: 10s
-      retries: 5
+      #- /opt/es-repo/:/opt/es-repo
+    #healthcheck:
+    #  test: curl --cacert /usr/share/elasticsearch/config/certs/ca/ca.crt -s https://localhost:9200 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
+    #  interval: 30s
+    #  timeout: 10s
+    #  retries: 5
 
   elasticsearch2:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.3.1
@@ -154,15 +154,17 @@ services:
       - "9201:9201"
       - "9301:9301"
     networks: ['stack']
-    depends_on: ['elasticsearch']
+    #depends_on: ['elasticsearch']
+    links:
+      - elasticsearch
     volumes:
       - /etc/elk/config/elasticsearch2.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-      - /opt/es-repo/:/opt/es-repo
-    healthcheck:
-      test: curl --cacert /usr/share/elasticsearch/config/certs/ca/ca.crt -s https://localhost:9201 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
-      interval: 30s
-      timeout: 10s
-      retries: 5
+      #- /opt/es-repo/:/opt/es-repo
+    #healthcheck:
+    #  test: curl --cacert /usr/share/elasticsearch/config/certs/ca/ca.crt -s https://localhost:9201 >/dev/null; if [[ $$? == 52 ]]; then echo 0; else echo 1; fi
+    #  interval: 30s
+    #  timeout: 10s
+    #  retries: 5
 
   logstash:
     image: docker.elastic.co/logstash/logstash:6.3.1
@@ -170,16 +172,16 @@ services:
     networks: ['stack']
     volumes:
       # logstash.yml=配置文件
-      - /etc/logstash/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - /etc/elk/config/logstash.yml:/usr/share/logstash/config/logstash.yml
       # xxx.conf是各种处理消息源的配置，自己定义即可
-      - /etc/logstash/conf.d/demo.conf:/usr/share/logstash/pipeline/logstash.conf
+      - /etc/elk/config/demo.conf:/usr/share/logstash/pipeline/logstash.conf
       # xxx.conf中使用的正则表达式可以写在patterns文件夹下，使用简单一点
-      - /etc/logstash/patterns/:/etc/logstash/patterns
-    healthcheck:
-      test: bin/logstash -t
-      interval: 60s
-      timeout: 50s
-      retries: 5
+      - /etc/elk/config/patterns/:/etc/logstash/patterns
+    #healthcheck:
+    #  test: bin/logstash -t
+    #  interval: 60s
+    #  timeout: 50s
+    #  retries: 5
 
   #logstash2:
   #  image: docker.elastic.co/logstash/logstash:6.3.1
@@ -206,6 +208,8 @@ services:
       - "5601:5601"
     networks: ['stack']
     depends_on: ['elasticsearch']
+    links:
+      - elasticsearch2
     user: root
     volumes:
       - /etc/elk/config/kibana.yml:/usr/share/kibana/config/kibana.yml
